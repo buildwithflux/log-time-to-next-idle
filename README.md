@@ -4,17 +4,17 @@ Measuring the performance of user interactions in the web browser
 
 ## Quick Start
 
-```
+```jsx
 <Tabs
-    onChange={(_event, newValue) => {
-      // This is where the magic happens
-      logTimeToNextIdle(`switching-to-tab-${newValue}`)
-      handleChange(newValue)
-      // There is no need to mark the end of the interaction
-    }}
+  onChange={(_event, newValue) => {
+    // This is where the magic happens
+    logTimeToNextIdle(`switching-to-tab-${newValue}`);
+    handleChange(newValue);
+    // There is no need to mark the end of the interaction
+  }}
 >
-    <Tab label="Library" />
-    <Tab label="Objects" />
+  <Tab label="Library" />
+  <Tab label="Objects" />
 </Tabs>
 ```
 
