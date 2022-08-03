@@ -94,7 +94,7 @@ In short, `log-time-to-next-idle` measures user interactions by queuing a reques
 
 - `name {String}` name passed into `logTimeToNextIdle`
 
-- `data {Object}` an optional plain object described below.
+- `data {Object}` a result object described below.
 
 **Returns**
 
@@ -111,4 +111,28 @@ In short, `log-time-to-next-idle` measures user interactions by queuing a reques
   // Flag that indicates whether `maxTimeInMs` was exceeded
   didTimeout,
 }
+```
+
+## Custom Logging
+
+Here is an example that logs to the console when in dev build mode, and logs to somewhere in the cloud when in prod build.
+
+```jsx
+<Tabs
+  onChange={(_event, tabName) => {
+    logTimeToNextIdle(`switching-to-tab-${tabName}`, (name, data) =>
+      if (process.env.NODE_ENV === "development") {
+        console.log(`${name} took ${data.durationInMs}ms`)
+      } else {
+        logSomewhere(name, {
+          durationInMs: data.durationInMs,
+        })
+      }
+    );
+    handleChange(tabName);
+  }}
+>
+  <Tab label="Library" />
+  <Tab label="Objects" />
+</Tabs>
 ```
