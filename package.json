@@ -1,6 +1,6 @@
 {
   "name": "@gregdingle/log-time-to-next-idle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Measuring the performance of user interactions with requestIdleCallback and requestAnimationFrame",
   "keywords": [
     "requestAnimationFrame",
