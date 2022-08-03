@@ -112,7 +112,7 @@ In the Chrome profiler, it ends up looking like this:
 {
   // Duration from `logTimeToNextIdle` to `requestIdleCallback`
   durationInMs,
-  // Duration from `logTimeToNextIdle` to `requestIdleCallback`
+  // Duration from `logTimeToNextIdle` to `requestAnimationFrame`
   frozenDurationInMs,
   // Flag that indicates whether `maxTimeInMs` was exceeded
   didTimeout,
