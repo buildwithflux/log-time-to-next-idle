@@ -50,3 +50,46 @@ In short, `log-time-to-next-idle` measures user interactions by queuing a reques
 ## Note on concurrency
 
 `log-time-to-next-idle` deals with overlapping interactions by cancelling earlier queued callbacks. In other words, the last interaction "wins" and any previous in-progress interaction is ignored.
+
+## Profiler integration
+
+`log-time-to-next-idle` will store measured intervals in the browser using [window.performance.measure](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measure) (if available). The intervals will then show up in the profiler (if available).
+
+In the Chrome profiler, it ends up looking like this:
+
+<!-- TODO: screenshot -->
+
+## API
+
+### `logTimeToNextIdle`
+
+**Parameters**
+
+- `name {String}` unique name of user interaction to measure. Required.
+
+- `callback {Function}` an optional function that runs when `requestIdleCallback` fires. The default is to log with `console.info`.
+
+- `options {Object}` an optional plain object described below.
+
+**Returns**
+
+- `undefined`
+
+**Options**
+
+```jsx
+{
+  // Warn when a new interaction starts while an old interaction is still in progress
+  warnOnConcurrent: true,
+  // Prepended to the name for logging and profiling
+  prefix: "",
+  // Appended to the name for logging and profiling
+  suffix: "",
+  // Appended to the name for logging and profiling of "frozen time"
+  frozenSuffix: "_frozen",
+  // Max time in milliseconds after which `requestIdleCallback` will fire
+  maxTime: 10000,
+  // Min time in milliseconds before which `requestIdleCallback` cannot fire
+  minTime: 10,
+}
+```
