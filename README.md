@@ -61,7 +61,7 @@ In the Chrome profiler, it ends up looking like this:
 
 ## API
 
-### `logTimeToNextIdle`
+### `logTimeToNextIdle(name, callback, options)`
 
 **Parameters**
 
@@ -90,7 +90,7 @@ In the Chrome profiler, it ends up looking like this:
 }
 ```
 
-### `callback`
+### `callback(name, data)`
 
 **Parameters**
 
