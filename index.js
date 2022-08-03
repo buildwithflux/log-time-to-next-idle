@@ -6,7 +6,7 @@ let frozenDurationInMs = 0;
 /**
  * @see https://github.com/buildwithflux/log-time-to-next-idle
  */
-export function logTimeToNextIdle(name, callback, options) {
+function logTimeToNextIdle(name, callback, options) {
   if (
     typeof window === "undefined" ||
     !window.requestIdleCallback ||
@@ -82,3 +82,5 @@ export function logTimeToNextIdle(name, callback, options) {
     );
   }, options.minTimeInMs);
 }
+
+exports.logTimeToNextIdle = logTimeToNextIdle;

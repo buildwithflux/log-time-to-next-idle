@@ -1,5 +1,5 @@
 {
-  "name": "@buildwithflux/log-time-to-next-idle",
+  "name": "@gregdingle/log-time-to-next-idle",
   "version": "1.0.0",
   "description": "Measuring the performance of user interactions with requestIdleCallback and requestAnimationFrame",
   "keywords": [
