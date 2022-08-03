@@ -1,6 +1,6 @@
 # log-time-to-next-idle
 
-Measuring the performance of user interactions in the web browser
+Measuring the performance of user interactions with requestIdleCallback and requestAnimationFrame
 
 ## Quick Start
 

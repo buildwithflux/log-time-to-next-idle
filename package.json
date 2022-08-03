@@ -1,0 +1,27 @@
+{
+  "name": "@buildwithflux/log-time-to-next-idle",
+  "version": "1.0.0",
+  "description": "Measuring the performance of user interactions with requestIdleCallback and requestAnimationFrame",
+  "keywords": [
+    "requestAnimationFrame",
+    "requestIdleCallback",
+    "performance",
+    "measurement",
+    "logging",
+    "web"
+  ],
+  "license": "MIT",
+  "author": "Greg Dingle (https://github.com/gregdingle)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buildwithflux/log-time-to-next-idle.git"
+  },
+  "bugs": {
+    "url": "https://github.com/buildwithflux/log-time-to-next-idle/issues"
+  },
+  "homepage": "https://github.com/buildwithflux/log-time-to-next-idle#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
