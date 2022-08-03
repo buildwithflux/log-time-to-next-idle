@@ -88,8 +88,33 @@ In the Chrome profiler, it ends up looking like this:
   // Appended to the name for logging and profiling of "frozen time"
   frozenSuffix: "_frozen",
   // Max time in milliseconds after which `requestIdleCallback` will fire
-  maxTime: 10000,
+  maxTimeInMs: 10000,
   // Min time in milliseconds before which `requestIdleCallback` cannot fire
-  minTime: 10,
+  minTimeInMs: 10,
+}
+```
+
+### `callback`
+
+**Parameters**
+
+- `name {String}` name passed into `logTimeToNextIdle`
+
+- `data {Object}` an optional plain object described below.
+
+**Returns**
+
+- `undefined`
+
+**Data**
+
+```jsx
+{
+  // Duration from `logTimeToNextIdle` to `requestIdleCallback`
+  durationInMs,
+  // Duration from `logTimeToNextIdle` to `requestIdleCallback`
+  frozenDurationInMs,
+  // Flag that indicates whether `maxTimeInMs` was exceeded
+  didTimeout,
 }
 ```
