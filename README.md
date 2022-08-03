@@ -55,10 +55,6 @@ In short, `log-time-to-next-idle` measures user interactions by queuing a reques
 
 `log-time-to-next-idle` will store measured intervals in the browser using [window.performance.measure](https://developer.mozilla.org/en-US/docs/Web/API/Performance/measure) (if available). The intervals will then show up in the profiler (if available).
 
-In the Chrome profiler, it ends up looking like this:
-
-<!-- TODO: screenshot -->
-
 ## API
 
 ### `logTimeToNextIdle(name, callback, options)`
