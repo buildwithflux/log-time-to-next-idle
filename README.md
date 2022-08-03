@@ -11,6 +11,8 @@ Measuring the performance of user interactions with requestIdleCallback and requ
     logTimeToNextIdle(`switching-to-tab-${tabName}`);
     handleChange(tabName);
     // There is no need to mark the end of the interaction
+    // You will see a message in the console like
+    // "switching-to-tab-library took 27ms until unfrozen, 117ms until idle"
   }}
 >
   <Tab label="Library" />
