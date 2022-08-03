@@ -71,7 +71,7 @@ function logTimeToNextIdle(name, callback, options) {
           });
         } else {
           console.info(
-            `${name} took ${durationInMs}ms until idle, ${frozenDurationInMs}ms until unfrozen`
+            `${name} took ${frozenDurationInMs}ms until unfrozen, ${durationInMs}ms until idle`
           );
         }
         requestIdleId = 0;
