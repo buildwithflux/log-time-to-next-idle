@@ -6,10 +6,10 @@ Measuring the performance of user interactions with requestIdleCallback and requ
 
 ```jsx
 <Tabs
-  onChange={(_event, newValue) => {
+  onChange={(_event, tabName) => {
     // This is where the magic happens
-    logTimeToNextIdle(`switching-to-tab-${newValue}`);
-    handleChange(newValue);
+    logTimeToNextIdle(`switching-to-tab-${tabName}`);
+    handleChange(tabName);
     // There is no need to mark the end of the interaction
   }}
 >
@@ -81,11 +81,7 @@ In the Chrome profiler, it ends up looking like this:
 {
   // Warn when a new interaction starts while an old interaction is still in progress
   warnOnConcurrent: true,
-  // Prepended to the name for logging and profiling
-  prefix: "",
-  // Appended to the name for logging and profiling
-  suffix: "",
-  // Appended to the name for logging and profiling of "frozen time"
+  // Appended to the name for profiling of "frozen time"
   frozenSuffix: "_frozen",
   // Max time in milliseconds after which `requestIdleCallback` will fire
   maxTimeInMs: 10000,

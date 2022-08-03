@@ -15,7 +15,15 @@ export function logTimeToNextIdle(name, callback, options) {
     return;
   }
 
-  const startMarkName = `FLUX-PERF:${name}_start`;
+  options = {
+    warnOnConcurrent: true,
+    frozenSuffix: "_frozen",
+    maxTimeInMs: 10000,
+    minTimeInMs: 10,
+    ...options,
+  };
+
+  const startMarkName = `${name}_start`;
   window.performance.mark(startMarkName);
 
   // setTimeout takes care of the possibilty that the idle callback somehow
@@ -26,14 +34,15 @@ export function logTimeToNextIdle(name, callback, options) {
     if (requestIdleId || requestAnimationId) {
       cancelIdleCallback(requestIdleId);
       cancelAnimationFrame(requestAnimationId);
-      // eslint-disable-next-line no-console
-      // TODO: parameterize
-      console.warn(startMarkName + " is displacing an exisiting idle callback");
+      options.warnOnConcurrent &&
+        // eslint-disable-next-line no-console
+        console.warn(
+          startMarkName + " is displacing an exisiting idle callback"
+        );
     }
     requestAnimationId = requestAnimationFrame(() => {
       const measure = window.performance.measure(
-        // TODO: parameterize prefix and suffix
-        `${name}_frozen`,
+        `${name}${options.frozenSuffix}`,
         startMarkName
       );
       // NOTE: FF and Safari don't support
@@ -43,10 +52,10 @@ export function logTimeToNextIdle(name, callback, options) {
     });
     requestIdleId = requestIdleCallback(
       ({ didTimeout }) => {
-        const endMarkName = `FLUX-PERF:${name}_end`;
+        const endMarkName = `${name}_end`;
         window.performance.mark(endMarkName);
         const measure = window.performance.measure(
-          `FLUX-PERF:${name}`,
+          `${name}`,
           startMarkName,
           endMarkName
         );
@@ -54,29 +63,22 @@ export function logTimeToNextIdle(name, callback, options) {
         if (!measure) return;
         const durationInMs = Math.round(measure.duration);
 
-        if (isProductionEnvironment()) {
-          // TODO: parameterize as callback
-          logEvent(name, {
+        if (callback) {
+          callback(name, {
             durationInMs,
-            didTimeout,
             frozenDurationInMs,
+            didTimeout,
           });
         } else {
-          // TODO: parameterize as default callback
           console.info(
-            `FLUX-PERF: ${name} took ${durationInMs}ms until idle, frozen ${frozenDurationInMs}ms`,
-            didTimeout ? " TIMEOUT" : ""
+            `${name} took ${durationInMs}ms until idle, ${frozenDurationInMs}ms until unfrozen`
           );
         }
         requestIdleId = 0;
       },
       {
-        // 10s timeout so duration is not unbounded and outliers don't
-        // mess up the stats.
-        // TODO: parameterize
-        timeout: 10000,
+        timeout: options.maxTimeInMs,
       }
     );
-    // TODO: parameterize
-  }, 10);
+  }, options.minTimeInMs);
 }
