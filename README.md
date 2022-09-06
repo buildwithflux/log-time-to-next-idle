@@ -4,7 +4,7 @@ Measuring the performance of user interactions with requestIdleCallback and requ
 
 ## Quick Start
 
-Just put a call to `logTimeToNextIdle` at the start of any event handler. Here is an example of logging the time it takes to switch tabs in a React app.
+Just put a call to `logTimeToNextIdle` at the start of any event handler. Here is an example of logging the time it takes to switch fictional tabs in a React app.
 
 ```jsx
 const logTimeToNextIdle = require('log-time-to-next-idle')
